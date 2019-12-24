@@ -47,6 +47,102 @@ public class TestCase {
 	}
 
 	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("2_checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    System.out.print("(TARGET is not set) ");
+	    freq = myObject.frequency();
+	    System.out.print("\"\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    if(-1 == freq) { System.out.println("OK"); } else {System.out.printf("WRONG\nIt doesn't return -1, when TARGET is not set.\n"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	    System.out.println("It doesn't return -1, when TARGET is not set.");
+	}
+
+	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("2_checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("".getBytes());
+	    System.out.print("(TARGET's length is zero) ");
+	    freq = myObject.frequency();
+	    System.out.print("\"\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    if(-1 == freq) { System.out.println("OK"); } else {System.out.printf("WRONG\nIt doesn't return -1, when TARGET's length is zero.\n"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	    System.out.println("It doesn't return -1, when TARGET's length is zero.");
+	}
+
+	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("3_checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setTarget("H".getBytes());
+	    System.out.print("(SPACE is not set) ");
+	    freq = myObject.frequency();
+	    System.out.print("\"H\" in \"\" appears "+freq+" times. ");
+	    if(0 == freq) { System.out.println("OK"); } else {System.out.printf("WRONG\nIt doesn't return 0, when SPACE is not set.\n"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	    System.out.println("It doesn't return 0, when SPACE is not set.");
+	}
+
+	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("3_checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setSpace("".getBytes());
+	    myObject.setTarget("H".getBytes());
+	    System.out.print("(Space's length is zero) ");
+	    freq = myObject.frequency();
+	    System.out.print("\"H\" in \"\" appears "+freq+" times. ");
+	    if(0 == freq) { System.out.println("OK"); } else {System.out.printf("WRONG\nIt doesn't return 0, when Space's length is zero.\n"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	    System.out.println("It doesn't return 0, when Space's length is zero.");
+	}
+
+	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("4_checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("Ho".getBytes());
+	    freq = myObject.frequency();
+	    System.out.print("\"Hi\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    if(2 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	}
+
+	try {
+	    FrequencerInterface  myObject;
+	    int freq;
+	    System.out.println("checking s4.B193324.Frequencer");
+	    myObject = new s4.B193324.Frequencer();
+	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("Ha".getBytes());
+	    freq = myObject.frequency();
+	    System.out.print("\"Ha\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    if(0 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception occurred: STOP");
+	}
+
+	try {
 	    InformationEstimatorInterface myObject;
 	    double value;
 	    System.out.println("checking s4.B193324.InformationEstimator");
