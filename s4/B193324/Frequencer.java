@@ -62,6 +62,8 @@ public class Frequencer implements FrequencerInterface {
         // if suffix_i < suffix_j, it returns -1
         // if suffix_i = suffix_j, it returns 0;
 
+        // ここにコードを記述せよ 
+        //
         if (i > suffixArray.length - 1) {
             return -1;
         } else if (j > suffixArray.length - 1) {
@@ -155,7 +157,9 @@ public class Frequencer implements FrequencerInterface {
         // "Ho" = "Ho"
         // "Ho" < "Ho " : "Ho " is not in the head of suffix "Ho"
         // "Ho" = "H" : "H" is in the head of suffix "Ho"
-
+        //
+        // ここに比較のコードを書け 
+        //
         for (int idx = 0; idx < k - j; idx++) {
             if (i + idx < suffixArray.length - 1) {
                 if (mySpace[i + idx] < myTarget[idx]) {
@@ -182,15 +186,17 @@ public class Frequencer implements FrequencerInterface {
         // if target_start_end is "Ho", it will return 5.
         // Assuming the suffix array is created from "Hi Ho Hi Ho",
         // if target_start_end is "Ho ", it will return 6.
-
+        //                                                                          
+        // ここにコードを記述せよ。                                                 
+        //
         for (int i = 0; i < mySpace.length; i++) {
-            int s = suffixArray[i];
-            int r = targetCompare(s, start, end);
-            if (r == 0) {
+            int suffixArrayElement = suffixArray[i];
+            int comparisonResult = targetCompare(suffixArrayElement, start, end);
+            if (comparisonResult == 0) {
                 return i;
             }
         }
-        return suffixArray.length;
+        return -1;
     }
 
     private int subByteEndIndex(int start, int end) {
@@ -206,22 +212,24 @@ public class Frequencer implements FrequencerInterface {
         // if target_start_end is "Ho", it will return 7 for "Hi Ho Hi Ho".
         // Assuming the suffix array is created from "Hi Ho Hi Ho",
         // if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".
-
-        boolean f = false;
+        //                                                                   
+        //　ここにコードを記述せよ                                           
+        //
+        boolean targetFoundOnce = false;
 
         for (int i = 0; i < mySpace.length; i++) {
-            int s = suffixArray[i];
-            int r = targetCompare(s, start, end);
-            if (r == 0) {
-                f = true;
+            int suffixArrayElement = suffixArray[i];
+            int comparisonResult = targetCompare(suffixArrayElement, start, end);
+            if (comparisonResult == 0) {
+                targetFoundOnce = true;
             }
-            if (f) {
-                if (r != 0) {
-                    return i - 1;
+            if (targetFoundOnce) {
+                if (comparisonResult != 0) {
+                    return i;
                 }
             }
         }
-        return suffixArray.length;
+        return -1;
     }
 
     // Suffix Arrayを使ったプログラムのホワイトテストは、
@@ -249,10 +257,10 @@ public class Frequencer implements FrequencerInterface {
             //
             // **** Please write code to check subByteStartIndex, and subByteEndIndex
             //
-            int res = frequencerObject.subByteStartIndex(0, 1);
-            System.out.println(res);
-            res = frequencerObject.subByteEndIndex(0, 1);
-            System.out.println(res);
+            // int res = frequencerObject.subByteStartIndex(0, 1);
+            // System.out.println(res);
+            // res = frequencerObject.subByteEndIndex(0, 1);
+            // System.out.println(res);
 
             int result = frequencerObject.frequency();
             System.out.print("Freq = " + result + " ");
