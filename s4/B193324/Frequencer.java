@@ -160,11 +160,15 @@ public class Frequencer implements FrequencerInterface {
         //
         // ここに比較のコードを書け 
         //
+
+        if (mySpace.length - i < k - j) {
+			return -1;
+		}
         for (int idx = 0; idx < k - j; idx++) {
-            if (i + idx < suffixArray.length - 1) {
-                if (mySpace[i + idx] < myTarget[idx]) {
+            if (i + idx < suffixArray.length) {
+                if (mySpace[i + idx] < myTarget[j + idx]) {
                     return -1;
-                } else if (mySpace[i + idx] > myTarget[idx]) {
+                } else if (mySpace[i + idx] > myTarget[j + idx]) {
                     return 1;
                 }
             }
@@ -229,7 +233,11 @@ public class Frequencer implements FrequencerInterface {
                 }
             }
         }
-        return -1;
+        if (targetFoundOnce) {
+            return mySpace.length;
+        } else {
+            return -1;
+        }
     }
 
     // Suffix Arrayを使ったプログラムのホワイトテストは、
