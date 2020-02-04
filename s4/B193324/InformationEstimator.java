@@ -52,29 +52,23 @@ public class InformationEstimator implements InformationEstimatorInterface {
 
 	public double estimation() {
 		double [] iq_memo = new double[myTarget.length];
-		double [] iq_memo2 = new double[myTarget.length - 1];
 		double value;
-		double value1;
 
 		for (int i = 1; i <= myTarget.length; i++) {
-			myFrequencer.setTarget(subBytes(myTarget, 0, i));
-			iq_memo[i - 1] = iq(myFrequencer.frequency());
+			for (int j = 0; j < i; j++) {
+				if (j == 0) {
+					myFrequencer.setTarget(subBytes(myTarget, 0, i));
+					iq_memo[i - 1] = iq(myFrequencer.frequency());
+				} else {
+					myFrequencer.setTarget(subBytes(myTarget, j, i));
+					value = iq_memo[i - 2] + iq(myFrequencer.frequency());
+					if (iq_memo[i - 1] > value) {
+						iq_memo[i - 1] = value;
+					}
+				}
+			}
 		}
-
-		for (int i = myTarget.length - 1; i > 0; i--) {
-			myFrequencer.setTarget(subBytes(myTarget, i, myTarget.length));
-			iq_memo2[myTarget.length - i -1] = iq(myFrequencer.frequency());
-		}
-
-		value = iq_memo[myTarget.length - 1];
-
-		for (int i = 0; i < myTarget.length - 1; i++) {
-			value1 = iq_memo[i] + iq_memo2[i];
-			if (value1 < value)
-				value = value1;
-		}
-
-		return value;
+		return iq_memo[myTarget.length - 1];
 	}
 
 	public static void main(String[] args) {

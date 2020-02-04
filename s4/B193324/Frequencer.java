@@ -64,7 +64,9 @@ public class Frequencer implements FrequencerInterface {
 
         // ここにコードを記述せよ 
         //
-        if (i > suffixArray.length - 1) {
+        if (i > suffixArray.length - 1 && j > suffixArray.length - 1) {
+            return 0;
+        } else if (i > suffixArray.length - 1) {
             return -1;
         } else if (j > suffixArray.length - 1) {
             return 1;
@@ -219,25 +221,35 @@ public class Frequencer implements FrequencerInterface {
         //                                                                   
         //　ここにコードを記述せよ                                           
         //
-        boolean targetFoundOnce = false;
 
-        for (int i = 0; i < mySpace.length; i++) {
-            int suffixArrayElement = suffixArray[i];
+        for (int i = mySpace.length; i > 0; i--) {
+            int suffixArrayElement = suffixArray[i - 1];
             int comparisonResult = targetCompare(suffixArrayElement, start, end);
             if (comparisonResult == 0) {
-                targetFoundOnce = true;
-            }
-            if (targetFoundOnce) {
-                if (comparisonResult != 0) {
-                    return i;
-                }
+                return i;
             }
         }
-        if (targetFoundOnce) {
-            return mySpace.length;
-        } else {
-            return -1;
-        }
+        return -1;
+
+        // boolean targetFoundOnce = false;
+
+        // for (int i = 0; i < mySpace.length; i++) {
+        //     int suffixArrayElement = suffixArray[i];
+        //     int comparisonResult = targetCompare(suffixArrayElement, start, end);
+        //     if (comparisonResult == 0) {
+        //         targetFoundOnce = true;
+        //     }
+        //     if (targetFoundOnce) {
+        //         if (comparisonResult != 0) {
+        //             return i;
+        //         }
+        //     }
+        // }
+        // if (targetFoundOnce) {
+        //     return mySpace.length;
+        // } else {
+        //     return -1;
+        // }
     }
 
     // Suffix Arrayを使ったプログラムのホワイトテストは、
