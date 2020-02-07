@@ -195,14 +195,27 @@ public class Frequencer implements FrequencerInterface {
         //                                                                          
         // ここにコードを記述せよ。                                                 
         //
-        for (int i = 0; i < mySpace.length; i++) {
-            int suffixArrayElement = suffixArray[i];
-            int comparisonResult = targetCompare(suffixArrayElement, start, end);
-            if (comparisonResult == 0) {
-                return i;
+
+        int imid, imin = 0, imax = mySpace.length - 1;
+        int pos = -1;
+
+        while(imax >= imin) {
+            imid = imin + (imax - imin) / 2;
+            if (targetCompare(suffixArray[imid], start, end) == 1) {
+                imax = imid - 1;
+            } else if (targetCompare(suffixArray[imid], start, end) == -1) {
+                imin = imid + 1;
+            } else {
+                if(imid == 0 || targetCompare(suffixArray[imid - 1], start, end) == -1){
+                    pos = imid;
+                    break;
+                } else {
+                    imax = imid - 1;
+                }
             }
         }
-        return -1;
+
+        return pos;
     }
 
     private int subByteEndIndex(int start, int end) {
@@ -222,34 +235,26 @@ public class Frequencer implements FrequencerInterface {
         //　ここにコードを記述せよ                                           
         //
 
-        for (int i = mySpace.length; i > 0; i--) {
-            int suffixArrayElement = suffixArray[i - 1];
-            int comparisonResult = targetCompare(suffixArrayElement, start, end);
-            if (comparisonResult == 0) {
-                return i;
+        int imid, imin = 0, imax = mySpace.length - 1;
+        int pos = -1;
+
+        while(imax >= imin) {
+            imid = imin + (imax - imin) / 2;
+            if (targetCompare(suffixArray[imid], start, end) == 1) {
+                imax = imid - 1;
+            } else if (targetCompare(suffixArray[imid], start, end) == -1) {
+                imin = imid + 1;
+            } else {
+                if(imid == mySpace.length - 1 || targetCompare(suffixArray[imid + 1], start, end) == 1){
+                    pos = imid + 1;
+                    break;
+                } else {
+                    imin = imid + 1;
+                }
             }
         }
-        return -1;
 
-        // boolean targetFoundOnce = false;
-
-        // for (int i = 0; i < mySpace.length; i++) {
-        //     int suffixArrayElement = suffixArray[i];
-        //     int comparisonResult = targetCompare(suffixArrayElement, start, end);
-        //     if (comparisonResult == 0) {
-        //         targetFoundOnce = true;
-        //     }
-        //     if (targetFoundOnce) {
-        //         if (comparisonResult != 0) {
-        //             return i;
-        //         }
-        //     }
-        // }
-        // if (targetFoundOnce) {
-        //     return mySpace.length;
-        // } else {
-        //     return -1;
-        // }
+        return pos;
     }
 
     // Suffix Arrayを使ったプログラムのホワイトテストは、
